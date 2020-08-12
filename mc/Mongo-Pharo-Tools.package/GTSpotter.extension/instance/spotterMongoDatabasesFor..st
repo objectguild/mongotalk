@@ -6,9 +6,9 @@ spotterMongoDatabasesFor: aStep
 		title: 'Mongo databases';
 		candidatesLimit: Float infinity;
 		allCandidates: [ 
-			Mongo default isAvailable 
-									ifFalse: [ #() ]
-									ifTrue: [ Mongo default open databases ]];
+			Mongo default isOpen
+				ifFalse: [ #() ]
+				ifTrue: [ Mongo default databases ] ];
 		itemName: [:item | item name ];
 		itemIcon: [:item | Smalltalk ui icons mongoDatabaseIcon ];
 		matchSubstring

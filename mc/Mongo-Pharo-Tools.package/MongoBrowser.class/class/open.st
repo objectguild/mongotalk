@@ -2,4 +2,4 @@ interface opening
 open
 	<script>
 
-	self openOn: Mongo default open 
+	self openOn: Mongo default ensureOpen

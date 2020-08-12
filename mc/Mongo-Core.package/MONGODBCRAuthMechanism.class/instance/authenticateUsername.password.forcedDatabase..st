@@ -1,6 +1,7 @@
 operations
 authenticateUsername: user password: pass forcedDatabase: aDatabase
 	| nonce reply pwd key |
+	self crTrace: 'Authenticating with MONGODB-CR'.
 	reply := self root
 		command:
 			(OrderedIdentityDictionary new
