@@ -1,0 +1,3 @@
+accessing
+hashFunction 
+	self subclassResponsibility 
