@@ -20,4 +20,5 @@ baseline: spec
 				group: 'Core' with: #('Mongo-Core' 'Mongo-Queries');
 				group: 'Tools' with: #('Mongo-Pharo-Tools');
 				group: 'Tests' with: #('Mongo-Tests-BSON' 'Mongo-Tests-Core' 'Mongo-Tests-Queries');
-				group: 'Client' with: #('default' 'Mongo-Client' 'Mongo-Client-Tests') ]
+				group: 'Client' with: #('default' 'Mongo-Client' 'Mongo-Client-Tests');
+				group: 'Client Core' with: #('Core' 'Mongo-Client') ]
