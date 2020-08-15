@@ -8,8 +8,11 @@ mongoDo: aBlockClosure
 	"
 
 	| mongo result |
-	[	mongo := self next.
+	[
+		mongo := self next.
 		result := aBlockClosure value: mongo.
+		
+		self flag: #FIXME. "Potential connection leak in case of error other than NetworkError or MongoWireProtocolError"
 		self return: mongo.
 		^ result ]
 			on: NetworkError, MongoWireProtocolError
