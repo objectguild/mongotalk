@@ -8,10 +8,10 @@ next
 	mutex critical: [
 		mongo := connections
 			ifEmpty: [ 
-				self crTrace: 'Creating new Mongo connection'.
+				Mongo debugLog: 'Creating new Mongo connection'.
 				Mongo url: url ]
 			ifNotEmpty: [ 
-				self crTrace: 'Re-using existing Mongo connection'.
+				Mongo debugLog: 'Re-using existing Mongo connection'.
 				connections removeFirst ] ].
 
 	"Caller assumes it's open."

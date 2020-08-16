@@ -1,7 +1,7 @@
 operations
 authenticateUsername: username password: password forcedDatabase: database
 	| nonce firstBare op resp serverFirst parsed iterations salt rnonce without_proof derivedKey clientKey storedKey authMsg clientSig clientProof clientFinal serverKey serverSig |
-	self crTrace: 'Authenticating against Mongo database ' , database name , ' using SCRAM-SHA-1 with username: ' , username asString.
+	Mongo debugLog: 'Authenticating against Mongo database ' , database name , ' using SCRAM-SHA-1 with username: ' , username asString.
 	nonce := (Random new next asString allButFirst: 2) asByteArray base64Encoded.
 	firstBare := 'n=' , username , ',r=' , nonce.
 	op := OrderedIdentityDictionary new

@@ -3,7 +3,8 @@
 	"super" : "Object",
 	"category" : "Mongo-Core-Base",
 	"classinstvars" : [
-		"defaultAuthMechanismClass"
+		"defaultAuthMechanismClass",
+		"Debug"
 	],
 	"pools" : [ ],
 	"classvars" : [

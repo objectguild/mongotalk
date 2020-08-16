@@ -7,7 +7,7 @@ username: aUserString password: aPasswordString database: aDatabase
 	stores only on username per database"
 	| authenticatedUser |
 	authenticatedUser := self authCache at: aDatabase name ifAbsent: [ nil ].
-	self crTrace: 'Cached authentication for database ' , aDatabase name asString , ' is username: ' , authenticatedUser asString.
+	Mongo debugLog: 'Cached authentication for database ' , aDatabase name asString , ' is username: ' , authenticatedUser asString.
 	(authenticatedUser isNil or: [  (authenticatedUser = aUserString) not ]) ifTrue: [ 
 		(self 
 			authenticateUsername: aUserString 
