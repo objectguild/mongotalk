@@ -11,12 +11,11 @@ mongoDo: aBlockClosure
 	[
 		mongo := self next.
 		result := aBlockClosure value: mongo.
-		
-		self flag: #FIXME. "Potential connection leak in case of error other than NetworkError or MongoWireProtocolError"
 		self return: mongo.
 		^ result ]
-			on: NetworkError, MongoWireProtocolError
-			do: [ :error |
-				self ensureCloseMongo: mongo.
-				self resetAll.
-				error pass ]
+		on: Error
+		do: [ :error | "Make sure we close regardless of the error"
+			self ensureCloseMongo: mongo.
+			(NetworkError, MongoWireProtocolError handles: error) 
+				ifTrue: [ self resetAll ]. "Reset pool on network error"
+			error pass ]
