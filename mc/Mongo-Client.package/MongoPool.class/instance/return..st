@@ -4,5 +4,9 @@ return: mongo
 
 	mutex critical: [
 		connections size >= settings maxConnections
-			ifTrue: [ self ensureCloseMongo: mongo ]
-			ifFalse: [ connections add: mongo ] ]
+			ifTrue: [ 
+				Mongo debugLog: 'Closing connection, reached pool maximum'.
+				self ensureCloseMongo: mongo ]
+			ifFalse: [ 
+				connections add: mongo.
+				Mongo debugLog: 'Stored connection in pool, current size: ' , connections size asString ] ]
