@@ -2,7 +2,9 @@
 	"commentStamp" : "MartinDias 2/24/2020 17:48",
 	"super" : "Object",
 	"category" : "Mongo-Client-Client",
-	"classinstvars" : [ ],
+	"classinstvars" : [
+		"Counter"
+	],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
