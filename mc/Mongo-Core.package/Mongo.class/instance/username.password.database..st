@@ -1,16 +1,13 @@
 operations
 username: aUserString password: aPasswordString database: aDatabase
-	"authenticate a user for a database. MongoDB needs authentication only once 
+	"Ensure user is authenticated for database. MongoDB requires authentication only once 
 	every connection/session per database/user combination. So in order not to slow
-	down things we cache the authentication setting. Note: A second authentication for
-	a database with a different user invalidates the first auth. That's why the authCache
-	stores only on username per database"
-	| authenticatedUser |
-	authenticatedUser := self authCache at: aDatabase name ifAbsent: [ nil ].
-	Mongo debugLog: 'Cached authentication for database ' , aDatabase name asString , ' is username: ' , authenticatedUser asString.
-	(authenticatedUser isNil or: [  (authenticatedUser = aUserString) not ]) ifTrue: [ 
-		(self 
-			authenticateUsername: aUserString 
-			password: aPasswordString 
-			database: aDatabase) ifTrue: [ 
-				self authCache at: aDatabase name put: aUserString ] ]
+	down things we cache the authentication setting.
+	Note: A second authentication for a database with a different user invalidates the 
+	first auth. That's why the authCache	stores only one username per database."
+	| cachedUser authResult |
+	mutex critical: [ "Using critical section to make sure we don't authenticate multiple times concurrently"
+		cachedUser := self authCache at: aDatabase name ifAbsent: nil.
+		aUserString = cachedUser ifFalse: [ 
+			authResult := self authenticateUsername: aUserString password: aPasswordString database: aDatabase.
+			authResult ifTrue: [ self authCache at: aDatabase name put: aUserString ] ] ].
