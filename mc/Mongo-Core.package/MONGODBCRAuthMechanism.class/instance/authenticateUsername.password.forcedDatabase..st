@@ -1,7 +1,7 @@
 operations
 authenticateUsername: user password: pass forcedDatabase: aDatabase
 	| nonce reply pwd key |
-	Mongo debugLog: 'Authenticating against Mongo database ' , aDatabase name , ' using MONGODB-CR with username: ' , user asString.
+	Mongo debugLog: 'MONGODB-CR auth for database ' , aDatabase name , ' with user ' , user asString.
 	reply := self root
 		command:
 			(OrderedIdentityDictionary new
