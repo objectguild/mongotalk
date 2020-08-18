@@ -1,3 +1,4 @@
 operations
 close
-	stream close
+	stream close.
+	stream := nil.

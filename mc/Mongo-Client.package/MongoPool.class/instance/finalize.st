@@ -1,3 +1,3 @@
 finalization
 finalize 
-	self stop
+	self resetAll
