@@ -6,16 +6,18 @@ mongoDo: aBlockClosure
 
 	Source: https://github.com/mongodb/specifications/blob/573b1f58a129056d651781ad99317b6c656e050e/source/server-discovery-and-monitoring/server-discovery-and-monitoring-summary.rst#id9
 	"
-
 	| mongo result |
+	Mongo debugLog: 'mongoDo: ' , self class counter asString.
 	[
+		self class increaseCounter.
 		mongo := self next.
 		result := aBlockClosure value: mongo.
-		self return: mongo.
+		self release: mongo.
+		self class decreaseCounter.
 		^ result ]
 		on: Error
 		do: [ :error | "Make sure we close regardless of the error"
 			self ensureCloseMongo: mongo.
 			(NetworkError, MongoWireProtocolError handles: error) 
 				ifTrue: [ self resetAll ]. "Reset pool on network error"
-			error pass ]
+			error pass ].
