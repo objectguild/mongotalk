@@ -14,8 +14,7 @@
 		"serverSelectionRandomGenerator",
 		"socketTimeout",
 		"maxConnections",
-		"monitorStopTimeout",
-		"client"
+		"monitorStopTimeout"
 	],
 	"name" : "MongoClientSettings",
 	"type" : "normal"

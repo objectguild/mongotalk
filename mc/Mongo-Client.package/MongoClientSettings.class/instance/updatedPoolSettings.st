@@ -1,3 +1,3 @@
 refreshing
 updatedPoolSettings
-	client ifNotNil: #updatedPoolSettings.
+	self changed: #poolSettings
