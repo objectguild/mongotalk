@@ -4,7 +4,6 @@ next
 	
 	IMPORTANT: When caller is done with the Mongo instance, it must either release it to this pool (see #release:) or close it (since it references an open Socket... else the Pharo image can run out of external semaphores)."
 	| mongo msg |
-	Mongo debugLog: 'next'.
 	mutex critical: [
 		mongo := connections
 			ifEmpty: [ 

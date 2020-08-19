@@ -2,7 +2,6 @@ as yet unclassified
 release: mongo
 	"Release to this pool an instance of Mongo previously obtained via #next. Ideally, such Mongo instance should be open and ready to be answered by #next on a new operation."
 	| msg |
-	Mongo debugLog: 'release'.
 	mutex critical: [
 		connections size >= settings maxConnections
 			ifTrue: [ 
